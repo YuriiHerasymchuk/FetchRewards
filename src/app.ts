@@ -8,8 +8,7 @@ interface Transaction {
 }
 
 class Transaction implements Transaction {
-    constructor(readonly payer: string, readonly points: number, readonly timestamp: Date, readonly _id = uuidv4()) {
-    }
+    constructor(readonly payer: string, readonly points: number, readonly timestamp: Date, readonly _id = uuidv4()) { }
 }
 
 class PaymentService {
@@ -18,7 +17,7 @@ class PaymentService {
     private transactionsByUser: Record<string, Array<Transaction>> = {};
     private balanceByUser: Record<string, number> = {};
 
-    constructor () {}
+    constructor() { }
 
     addTransaction(transaction: Transaction) {
         const { _id: transactionId, payer: userName, points: transactionPoints } = transaction;
@@ -40,14 +39,14 @@ class PaymentService {
         PaymentService.sortTransactions(this.transactions);
         PaymentService.sortTransactions(usersTransactions);
     }
-    
+
     spendPoints(pointsToSpend: number) {
         this.subtractPointsFromTransactions(this.transactions, pointsToSpend);
     }
 
     private subtractPointsFromTransactions(transactions: Array<Transaction>, pointsToAllocate: number, timestamp: Date | null = null) {
         const transactionsForAllocation = this.filterTransactionsForAllocation(transactions, pointsToAllocate, timestamp);
-        
+
         for (const transaction of transactionsForAllocation) {
             const { _id: curTransactionId } = transaction;
             const transactionPointsLeft = this.pointsLeftByTransactionId[curTransactionId] || 0;
@@ -84,7 +83,7 @@ class PaymentService {
         console.log(this.transactionsByUser);
     }
 
-    static sortTransactions (transactions: Array<Transaction>) { // TODO: move from here
+    static sortTransactions(transactions: Array<Transaction>) { // TODO: move from here
         transactions.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime()); // TODO: redo sort
     }
 }
