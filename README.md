@@ -18,7 +18,7 @@ To process all of the unit tests run
 npm run test
 ```
 
-## Postment
+## Postman
 
 To test requests in Postman, import JSON file inside on the postman directory following this instruction 
 https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman
